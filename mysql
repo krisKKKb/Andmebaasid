@@ -1,0 +1,45 @@
+SELECT * FROM books
+;
+SELECT * FROM books
+Where release_date >2010 and type = "used"
+order by (title)
+;
+SELECT title, release_date, price, type
+FROM books
+where price <20 and release_date <1970 and type = "used"
+;
+select count(*) as "Tellimuste Arv", Year(order_date) as Aasta
+from orders
+group by(year(order_date))
+;
+select year(order_date) as Aasta, round(SUM(price)) as "Müükide Summa"
+from orders
+left join books
+on orders.book_id = books.id
+group by(year(order_date))
+;
+select year(order_date) as Aasta, Sum(price) As "Müükide summa", count(*) as "Taidetud tellimuste arv"
+from orders
+left join books
+on orders.book_id = books.id
+where year(order_date) = 2017
+;
+select sum(price)  as "Kulutatud summa", client_id as Klient, first_name as Eesnimi, last_name as perekonnanimi
+from orders
+left join books
+on orders.client_id = books.id
+left join clients
+on orders.client_id = clients.id
+where year(order_date) = 2017
+group by client_id
+;
+SELECT title as "Raamatu nimi",count(*) as "Muudud arv"
+from orders
+left join books
+on orders.book_id = books.id
+group by (title)
+;
+select title as Pealkiri, price as Hind
+from books
+where price > (select avg(price) from books)
+;
