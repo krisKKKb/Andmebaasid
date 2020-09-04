@@ -43,3 +43,6 @@ select title as Pealkiri, price as Hind
 from books
 where price > (select avg(price) from books)
 ;
+Select  round(sum(stock_saldo * price),2) as Koguhind
+from books
+;
