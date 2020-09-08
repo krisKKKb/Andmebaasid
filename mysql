@@ -46,3 +46,19 @@ where price > (select avg(price) from books)
 Select  round(sum(stock_saldo * price),2) as Koguhind
 from books
 ;
+select round(min(price),2) as "Odavaim Hind", round(avg(price),2) as "Keskmine hind", round(max(price),2) as "Kallim hind"
+from books
+;
+select round(max(price), 2) as "Kalleim Kasutatud raamat" 
+from books
+where type = "used"
+;
+select round(avg(price),2) as "Keskmine hind", count(*) as "Hulk",
+case
+	when type = "new" then "uus"
+	when type = "used" then "kasutatud"
+	when type = "ebook" then "E-Raamat"
+end as "Tuup"
+from books
+group by type
+;
